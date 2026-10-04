@@ -33,10 +33,11 @@ IN ACCEPT -p tcp -dport 443
 const HOST = `
 [OPTIONS]
 enable: 1
-nftables: 1          # opt in to proxmox-firewall on this node
+# opt in to proxmox-firewall on this node (no trailing comments on option lines)
+nftables: 1
 
 [RULES]
-IN ACCEPT -source +local_network -p tcp -dport 9100   # node_exporter
+IN ACCEPT -source local_network -p tcp -dport 9100   # node_exporter (alias, no +)
 `;
 
 const VM = `
@@ -96,7 +97,7 @@ export default async function Page() {
           { label: "Node", cells: [<span key="b" className="font-mono">/etc/pve/nodes/&lt;node&gt;/host.fw</span>, "that node only", "evaluated before the datacenter rules; per-node options (nftables, log levels, conntrack limits)"] },
           { label: "Guest", cells: [<span key="c" className="font-mono">/etc/pve/firewall/&lt;vmid&gt;.fw</span>, "NICs with firewall=1", "own enable (default 0), policies, ipfilter/macfilter, IP sets like ipfilter-net0"] },
           { label: "Security group", cells: [<span key="d" className="font-mono">[group name]</span>, "nothing on its own", "a named list of rules, inserted wherever a GROUP name rule appears"] },
-          { label: "IP set / alias", cells: [<span key="e" className="font-mono">+name / name</span>, "—", "reusable address lists; management, blocklist and ipfilter-netX have special meaning"] },
+          { label: "IP set / alias", cells: [<span key="e" className="font-mono">+name / name</span>, "—", "reusable address lists; management, blacklist and ipfilter-netX have special meaning (blocklist here is an ordinary set)"] },
           { label: "VNet (nftables)", cells: [<span key="f" className="font-mono">/etc/pve/sdn/firewall/&lt;vnet&gt;.fw</span>, "forwarded traffic", "only with the nftables backend; FORWARD direction"] },
         ]}
       />
@@ -134,8 +135,7 @@ export default async function Page() {
       </div>
 
       <Section title="iptables today, nftables next" kicker="pve-firewall vs proxmox-firewall">
-        The classic <span className="font-mono">pve-firewall</span> generates iptables rules (via the iptables-nft
-        compatibility layer on Debian 13). Its successor <span className="font-mono">proxmox-firewall</span>, written in
+        The classic <span className="font-mono">pve-firewall</span> generates iptables/ipset rules. Its successor <span className="font-mono">proxmox-firewall</span>, written in
         Rust, generates native nftables rules. It has been opt-in per node since PVE 8.2 (<span className="font-mono">nftables: 1</span>{" "}
         in host.fw) and is still marked tech preview in the PVE 9 docs, while it moves toward becoming the default. It
         reads the same config files, so you can switch per node and back. It drops the fwbr detour for Linux bridges and

@@ -31,7 +31,7 @@ const DAEMONS = [
 ];
 
 const setup = `
-# on every node (PVE 9 installs Ceph Squid 19.2)
+# on every node (PVE 9.2 defaults to Ceph Tentacle 20.2; --version squid for 19.2)
 pveceph install --repository no-subscription
 
 # once: write /etc/pve/ceph.conf (shared by all nodes through pmxcfs)

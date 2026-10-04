@@ -149,7 +149,7 @@ export default async function Page() {
           <Callout tone="info" title="privsep">
             With <span className="font-mono">-privsep 0</span> the token has its user&apos;s privileges. With{" "}
             <span className="font-mono">-privsep 1</span> it has no privileges until you also grant an ACL to the token
-            itself (<span className="font-mono">pveum aclmod / -token &apos;kubernetes-csi@pve!csi&apos; -role CSI</span>).
+            itself (<span className="font-mono">pveum aclmod / -tokens &apos;kubernetes-csi@pve!csi&apos; -role CSI</span>).
           </Callout>
         </div>
       </div>

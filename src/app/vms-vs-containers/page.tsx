@@ -141,7 +141,7 @@ export default function Page() {
         <div className="flex flex-col gap-3">
           <Callout title="machine: q35 (vs the older i440fx)">
             q35 emulates a modern chipset with native PCIe, which PCIe passthrough and many modern guests expect. The machine
-            version (e.g. <span className="font-mono">pc-q35-10.0+pve1</span>) is pinned for Windows guests and on live
+            version (e.g. <span className="font-mono">pc-q35-11.0+pve1</span>) is pinned for Windows guests and on live
             migration, so a QEMU upgrade never changes the hardware the guest sees under its feet.
           </Callout>
           <Callout tone="warn" title="Windows needs drivers">
@@ -159,8 +159,8 @@ export default function Page() {
       <div className="mt-4">
         <Callout title="Containers for app images?">
           For Docker/OCI workloads the Proxmox docs recommend a VM. Proxmox VE 9.1 added the ability to create LXC
-          containers from OCI images (technology preview), but they run as system containers on the host kernel, not
-          under a Docker daemon.
+          containers from OCI images (system containers from suitable images; application containers are a technology
+          preview), but they still run as LXC on the host kernel, not under a Docker daemon.
         </Callout>
       </div>
 

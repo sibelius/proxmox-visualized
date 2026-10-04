@@ -352,7 +352,7 @@ function Hint({ n, nodes, qdevice, partitions, even }: { n: number; nodes: Node[
     msg = (
       <>
         Odd node count: the QDevice runs the <b>lms</b> algorithm and carries <b>N−1 = {n - 1}</b> votes, so a single node
-        that can still reach qnetd keeps quorum. Proxmox discourages this: if qnetd itself fails, you can lose quorum where a
+        that can still reach qnetd keeps quorum. Proxmox discourages this (pvecm qdevice setup refuses odd clusters without --force): if qnetd itself fails, you can lose quorum where a
         plain {n}-node cluster would not. QDevices are meant for even clusters (and 2-node clusters most of all).
       </>
     );

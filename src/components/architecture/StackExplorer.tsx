@@ -36,7 +36,7 @@ const KERNEL: Block = {
   sub: "proxmox-kernel-6.x (Ubuntu-derived, ZFS built in)",
   color: "#38bdf8",
   title: "Debian userland, Proxmox kernel",
-  what: "Proxmox VE 9 is plain Debian 13 plus Proxmox's own APT repositories. The one big difference is the kernel: proxmox-kernel is based on Ubuntu's kernel sources, with ZFS compiled in and Proxmox's own patches for KVM, LXC and newer hardware. PVE 9.0 shipped 6.14; newer opt-in series follow.",
+  what: "Proxmox VE 9 is plain Debian 13 plus Proxmox's own APT repositories. The one big difference is the kernel: proxmox-kernel is based on Ubuntu's kernel sources, with ZFS compiled in and Proxmox's own patches for KVM, LXC and newer hardware. PVE 9.0 shipped 6.14, 9.1 moved the default to 6.17 and 9.2 to 7.0.",
   why: "Debian's stock kernel can't ship ZFS (licensing) and moves slowly on new hardware. Using a single tested kernel for KVM, LXC, ZFS and Ceph is what lets Proxmox treat all of them as one product. Everything else is normal Debian: apt, systemd, journald.",
   files: [
     "/etc/apt/sources.list.d/proxmox.sources  (deb822 format in PVE 9)",
@@ -44,7 +44,7 @@ const KERNEL: Block = {
     "/boot/vmlinuz-6.*-pve",
   ],
   procs: ["systemd (PID 1)", "journald", "chronyd"],
-  try: "uname -r          # 6.14.x-y-pve\npveversion -v\nproxmox-boot-tool kernel list",
+  try: "uname -r          # e.g. 7.0.x-y-pve on PVE 9.2\npveversion -v\nproxmox-boot-tool kernel list",
 };
 
 const ENGINES: Block[] = [

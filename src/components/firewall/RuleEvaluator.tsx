@@ -81,7 +81,7 @@ function buildRules(vpnRule: boolean): { host: Rule[]; vmIn: Rule[]; vmOut: Rule
     { file: "group webserver", text: "IN ACCEPT -p tcp -dport 443", dir: "in", action: "ACCEPT", proto: "tcp", dport: [443, 443] },
   ];
   const host: Rule[] = [
-    { file: "host.fw (pve1)", text: "IN ACCEPT -source +local_network -p tcp -dport 9100", dir: "in", action: "ACCEPT", src: "+local_network", proto: "tcp", dport: [9100, 9100] },
+    { file: "host.fw (pve1)", text: "IN ACCEPT -source local_network -p tcp -dport 9100", dir: "in", action: "ACCEPT", src: "+local_network", proto: "tcp", dport: [9100, 9100] },
     { file: "cluster.fw", text: "IN DROP -source +blocklist", dir: "in", action: "DROP", src: "+blocklist" },
     ...(vpnRule
       ? [{ file: "cluster.fw", text: "IN ACCEPT -source 10.8.0.0/24 -p tcp -dport 8006", dir: "in" as Dir, action: "ACCEPT" as Verdict, src: "10.8.0.0/24", proto: "tcp" as Proto, dport: [8006, 8006] as [number, number] }]

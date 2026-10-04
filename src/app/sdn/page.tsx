@@ -201,8 +201,8 @@ export default async function Page() {
         hand. Proxmox VE 9.0 added SDN <b className="text-ink">fabrics</b>: you list the nodes and their interfaces, and
         Proxmox configures <b className="text-ink">OpenFabric</b> or <b className="text-ink">OSPF</b> in FRR so every node
         learns routes to every other node&apos;s loopback. This works well with full-mesh links that have no switch (for
-        example a 3-node Ceph mesh). An EVPN controller can then use the fabric as its underlay. Later 9.x releases add
-        more fabric protocols; check the release notes for your version.
+        example a 3-node Ceph mesh). An EVPN controller can then use the fabric as its underlay. PVE 9.2 added
+        WireGuard and BGP as further fabric protocols.
       </Section>
 
       <Takeaways
